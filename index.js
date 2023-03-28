@@ -44,7 +44,7 @@ function recipesPattern(recipes) {
       ingredientLine.classList.add("ingredient-line");
       const ingredientName = document.createElement("span");
       ingredientName.classList.add("ingredient");
-      ingredientName.innerText = `${ingredients[j].ingredient}:`;
+      ingredientName.innerText = `${ingredients[j].ingredient} : `;
       console.log(ingredients[j]);
       ingredientList.appendChild(ingredientLine);
       ingredientLine.appendChild(ingredientName);
@@ -52,7 +52,7 @@ function recipesPattern(recipes) {
       if (Object.prototype.hasOwnProperty.call(ingredients[j], "quantity")) {
         const ingredientQuantity = document.createElement("span");
         ingredientQuantity.classList.add("quantity");
-        ingredientQuantity.innerText = ingredients[j].quantity;
+        ingredientQuantity.innerText = `${ingredients[j].quantity} `;
         ingredientLine.appendChild(ingredientQuantity);
       }
 
