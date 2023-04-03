@@ -80,7 +80,6 @@ header img {
   align-items: center;
   justify-content: space-between;
   border-radius: 5px;
-  overflow: hidden;
   color: white;
   font-weight: 700;
   font-weight: 1.125em;
@@ -95,6 +94,30 @@ header img {
 
 #sort-section #tags-selection #ingredients {
   background-color: #3282f7;
+  position: relative;
+}
+
+#sort-section #tags-selection #ingredients .ingredients-container {
+  position: absolute;
+  background-color: #3282f7;
+  border-radius: 0px 0px 5px 5px;
+  width: 667px;
+  height: 350px;
+  top: 69px;
+  left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+  font-weight: 400;
+  overflow: hidden;
+  overflow-y: scroll;
+  display: block;
+}
+
+#sort-section #tags-selection #ingredients .ingredients-container .tag {
+  width: 32.5%;
+  margin-bottom: 10px;
 }
 
 #sort-section #tags-selection #devices {
