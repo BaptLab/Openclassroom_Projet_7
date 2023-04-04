@@ -71,60 +71,205 @@ header img {
   width: 100%;
   display: flex;
   margin-bottom: 25px;
+  display: flex;
 }
 
 #sort-section #tags-selection .tag-selector {
-  width: 170px;
+  margin-right: 20px;
+  width: 185px;
   height: 69px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  position: relative;
   border-radius: 5px;
-  color: white;
-  font-weight: 700;
-  font-weight: 1.125em;
-  padding: 0px 19px;
-  margin-right: 20px;
 }
 
-#sort-section #tags-selection .tag-selector:hover {
+#sort-section #tags-selection .tag-selector .tag-button:hover {
+  cursor: pointer;
+  filter: brightness(110%);
+}
+
+#sort-section #tags-selection .tag-selector input {
+  width: 100%;
+  padding: 0px 19px;
+  border-radius: 5px;
+  overflow: hidden;
+  font-weight: 400;
+}
+
+#sort-section #tags-selection .open input {
+  border-radius: 5px 5px 0px 0px;
+}
+
+#sort-section #tags-selection .ingredients {
+  background-color: #3282f7;
+}
+
+#sort-section #tags-selection .tag-selector i {
+  position: absolute;
+  color: white;
+  right: 19px;
+  top: 25.5px;
+}
+
+#sort-section #tags-selection .tag-selector .tag-button {
+  display: flex;
+  align-items: center;
+  color: white;
+  justify-content: space-between;
+  font-weight: 700;
+  font-weight: 1.125em;
+  border: none;
+}
+
+#sort-section #tags-selection .tag-selector .tag-button::placeholder {
+  color: white;
+}
+
+#sort-section #tags-selection .tag-selector .tag-button:focus {
+  border: none;
+  outline: none;
+  caret-color: transparent;
+}
+
+#sort-section #tags-selection .open .tag-button:focus {
+  caret-color: white;
+}
+
+#sort-section #tags-selection .open {
+  width: 667px;
+  border-radius: 5px 5px 0px 0px;
+}
+
+#sort-section #tags-selection .open input:focus::placeholder {
+  color: transparent;
+}
+
+#sort-section #tags-selection .tag-selector .ingredients-container {
+  position: absolute;
+  border-radius: 0px 0px 5px 5px;
+  width: auto;
+  height: auto;
+  max-height: 350px;
+  top: 69px;
+  left: 0;
+  display: none;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 10px 0px;
+  font-weight: 400;
+  overflow: hidden;
+  overflow-y: scroll;
+  color: white;
+  background-color: #3282f7;
+}
+
+#sort-section #tags-selection .tag-selector .ingredients-container::after {
+  content: "";
+  flex: auto;
+}
+
+#sort-section #tags-selection .tag-selector .devices-container {
+  position: absolute;
+  border-radius: 0px 0px 5px 5px;
+  width: auto;
+  height: auto;
+  max-height: 350px;
+  top: 69px;
+  left: 0;
+  display: none;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 10px 0px;
+  font-weight: 400;
+  overflow: hidden;
+  overflow-y: scroll;
+  color: white;
+  background-color: #68d9a4;
+}
+
+#sort-section #tags-selection .tag-selector .devices-container::after {
+  content: "";
+  flex: auto;
+}
+
+#sort-section #tags-selection .tag-selector .ustensils-container {
+  position: absolute;
+  border-radius: 0px 0px 5px 5px;
+  width: auto;
+  height: auto;
+  max-height: 350px;
+  top: 69px;
+  left: 0;
+  display: none;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 10px 0px;
+  font-weight: 400;
+  overflow: hidden;
+  overflow-y: scroll;
+  color: white;
+  background-color: #ed6454;
+}
+
+#sort-section #tags-selection .tag-selector .ustensils-container::after {
+  content: "";
+  flex: auto;
+}
+
+#sort-section #tags-selection .tag-selector .extended {
+  transition-duration: 0.5s;
+  display: flex;
+  width: 667px;
+}
+
+#sort-section #tags-selection .tag-selector .tag-container::-webkit-scrollbar {
+  display: none;
+}
+
+#sort-section #tags-selection .tag-selector .ingredients-container .tag {
+  width: 32.5%;
+  height: 35px;
+  background-color: #3282f7;
+  padding-left: 20px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+}
+
+#sort-section #tags-selection .tag-selector .devices-container .tag {
+  width: 32.5%;
+  height: 35px;
+  background-color: #68d9a4;
+  padding-left: 20px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+}
+
+#sort-section #tags-selection .tag-selector .ustensils-container .tag {
+  width: 32.5%;
+  height: 35px;
+  background-color: #ed6454;
+  padding-left: 20px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+}
+
+#sort-section #tags-selection .tag-selector .tag:hover {
   filter: brightness(110%);
   cursor: pointer;
 }
 
-#sort-section #tags-selection #ingredients {
+#sort-section #tags-selection .tag-selector #ingredients {
   background-color: #3282f7;
-  position: relative;
 }
 
-#sort-section #tags-selection #ingredients .ingredients-container {
-  position: absolute;
-  background-color: #3282f7;
-  border-radius: 0px 0px 5px 5px;
-  width: 667px;
-  height: 350px;
-  top: 69px;
-  left: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 20px;
-  font-weight: 400;
-  overflow: hidden;
-  overflow-y: scroll;
-  display: block;
-}
-
-#sort-section #tags-selection #ingredients .ingredients-container .tag {
-  width: 32.5%;
-  margin-bottom: 10px;
-}
-
-#sort-section #tags-selection #devices {
+#sort-section #tags-selection .tag-selector #devices {
   background-color: #68d9a4;
 }
 
-#sort-section #tags-selection #utensils {
+#sort-section #tags-selection .tag-selector #ustensils {
   background-color: #ed6454;
 }
 

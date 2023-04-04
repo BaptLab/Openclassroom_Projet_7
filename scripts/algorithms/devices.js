@@ -7,6 +7,6 @@ export function devices(recipes) {
       devicesTag.push(recipes[i].appliance);
     }
   }
-  console.log(devicesTag.sort());
-  return devicesTag.sort();
+  devicesTag.sort();
+  return devicesTag;
 }
