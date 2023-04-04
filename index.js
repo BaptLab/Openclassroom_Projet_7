@@ -16,6 +16,7 @@ function main() {
   ustensils(data);
   devices(data);
   TagsDisplayEvent();
+  TagPicking();
 }
 
 main();
@@ -28,7 +29,7 @@ document.querySelector("#search-input").addEventListener("input", (e) => {
   }
 });
 
-//A refactoriser
+//A refactoriser pour éviter les duplications
 function TagsDisplayEvent() {
   let ingredientList = false;
   let ingredients = document.querySelector(".ingredients-container");
@@ -80,7 +81,6 @@ function TagsDisplayEvent() {
 
   document.querySelector("body").addEventListener("click", (e) => {
     let tagSelector = e.target.parentNode;
-    console.log(tagSelector);
     if (tagSelector != document.querySelector(".ingredients")) {
       ingredientsBtn.classList.remove("open");
       ingredients.classList.remove("extended");
@@ -90,7 +90,6 @@ function TagsDisplayEvent() {
 
   document.querySelector("body").addEventListener("click", (e) => {
     let tagSelector = e.target.parentNode;
-    console.log(tagSelector);
     if (tagSelector != document.querySelector(".devices")) {
       devicesBtn.classList.remove("open");
       devices.classList.remove("extended");
@@ -100,11 +99,74 @@ function TagsDisplayEvent() {
 
   document.querySelector("body").addEventListener("click", (e) => {
     let tagSelector = e.target.parentNode;
-    console.log(tagSelector);
     if (tagSelector != document.querySelector(".ustensils")) {
       ustensilsBtn.classList.remove("open");
       ustensils.classList.remove("extended");
       ustensilList = false;
     }
   });
+}
+
+//refactoriser pour éviter la duplication
+function TagPicking() {
+  let ingredientsTags = document.querySelectorAll(".ingredients-container .tag");
+  let tagDisplaySection = document.querySelector("#tags-displaying");
+  for (let i = 0; i < ingredientsTags.length; i++) {
+    ingredientsTags[i].addEventListener("click", (e) => {
+      let tagPicked = document.createElement("span");
+      tagPicked.classList.add("text");
+      tagPicked.innerText = e.target.innerText;
+      let tagPickedContainer = document.createElement("div");
+      let deleteIcone = document.createElement("span");
+      deleteIcone.classList.add("fa-regular", "fa-circle-xmark", "fa-lg", "close-icon");
+      tagPickedContainer.classList.add("tag-picked-container");
+      tagPickedContainer.classList.add("ingredients-tag");
+      tagDisplaySection.appendChild(tagPickedContainer);
+      tagPickedContainer.appendChild(tagPicked);
+      tagPickedContainer.appendChild(deleteIcone);
+      deleteIcone.addEventListener("click", (e) => {
+        e.target.parentNode.remove();
+      });
+    });
+  }
+
+  let devicesTags = document.querySelectorAll(".devices-container .tag");
+  for (let i = 0; i < devicesTags.length; i++) {
+    devicesTags[i].addEventListener("click", (e) => {
+      let tagPicked = document.createElement("span");
+      tagPicked.classList.add("text");
+      tagPicked.innerText = e.target.innerText;
+      let tagPickedContainer = document.createElement("div");
+      let deleteIcone = document.createElement("span");
+      deleteIcone.classList.add("fa-regular", "fa-circle-xmark", "fa-lg", "close-icon");
+      tagPickedContainer.classList.add("tag-picked-container");
+      tagPickedContainer.classList.add("devices-tag");
+      tagDisplaySection.appendChild(tagPickedContainer);
+      tagPickedContainer.appendChild(tagPicked);
+      tagPickedContainer.appendChild(deleteIcone);
+      deleteIcone.addEventListener("click", (e) => {
+        e.target.parentNode.remove();
+      });
+    });
+  }
+
+  let ustensilsTags = document.querySelectorAll(".ustensils-container .tag");
+  for (let i = 0; i < ustensilsTags.length; i++) {
+    ustensilsTags[i].addEventListener("click", (e) => {
+      let tagPicked = document.createElement("span");
+      tagPicked.classList.add("text");
+      tagPicked.innerText = e.target.innerText;
+      let tagPickedContainer = document.createElement("div");
+      let deleteIcone = document.createElement("span");
+      deleteIcone.classList.add("fa-regular", "fa-circle-xmark", "fa-lg", "close-icon");
+      tagPickedContainer.classList.add("tag-picked-container");
+      tagPickedContainer.classList.add("ustensils-tag");
+      tagDisplaySection.appendChild(tagPickedContainer);
+      tagPickedContainer.appendChild(tagPicked);
+      tagPickedContainer.appendChild(deleteIcone);
+      deleteIcone.addEventListener("click", (e) => {
+        e.target.parentNode.remove();
+      });
+    });
+  }
 }

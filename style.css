@@ -67,6 +67,43 @@ header img {
   cursor: pointer;
 }
 
+#tags-displaying {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#tags-displaying .tag-picked-container {
+  margin-right: 20px;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  margin-bottom: 15px;
+}
+
+#tags-displaying .ingredients-tag {
+  background-color: #3282f7;
+}
+
+#tags-displaying .devices-tag {
+  background-color: #68d9a4;
+}
+
+#tags-displaying .ustensils-tag {
+  background-color: #ed6454;
+}
+
+#tags-displaying .tag-picked-container .text {
+  margin-right: 10px;
+  cursor: default;
+}
+
+#tags-displaying .tag-picked-container .close-icon {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
 #sort-section #tags-selection {
   width: 100%;
   display: flex;
