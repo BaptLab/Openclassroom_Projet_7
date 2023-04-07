@@ -1,5 +1,6 @@
 export function ustensilsPattern(ustensils) {
   const ustensilsContainer = document.querySelector(".ustensils-container");
+  ustensilsContainer.innerHTML = "";
   for (let i = 0; i < ustensils.length; i++) {
     let ustensilTag = document.createElement("span");
     ustensilTag.innerText = ustensils[i];

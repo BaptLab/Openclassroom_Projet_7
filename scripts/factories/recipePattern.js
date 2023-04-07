@@ -1,4 +1,7 @@
 export function recipesPattern(recipes) {
+  console.log(recipes);
+  const recipeContainer = document.querySelector("#recipes-container");
+  recipeContainer.innerHTML = "";
   for (let i = 0; i < recipes.length; i++) {
     const { id, name, servings, ingredients, time, description, appliance, ustensils } =
       recipes[i];
@@ -71,7 +74,6 @@ export function recipesPattern(recipes) {
     recipeTextContainer.appendChild(recipeText);
     recipeArticle.appendChild(descriptionSection);
 
-    const recipeContainer = document.querySelector("#recipes-container");
     recipeContainer.appendChild(recipeArticle);
   }
 }

@@ -5,7 +5,7 @@ import { ustensils } from "./scripts/algorithms/ustensils.js";
 import { devices } from "./scripts/algorithms/devices.js";
 import { ingredientPattern } from "./scripts/factories/ingredientPattern.js";
 import { devicePattern } from "./scripts/factories/devicesPattern.js";
-import { sort } from "./scripts/algorithms/sort.js";
+import { sortRecipes } from "./scripts/algorithms/sort.js";
 import { ustensilsPattern } from "./scripts/factories/ustensilsPattern.js";
 
 function main() {
@@ -25,7 +25,7 @@ main();
 document.querySelector("#search-input").addEventListener("input", (e) => {
   let input = e.target.value;
   if (input.length > 2) {
-    sort(input, recipes);
+    recipesPattern(sortRecipes(input, data));
   }
 });
 

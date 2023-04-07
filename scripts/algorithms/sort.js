@@ -1,11 +1,25 @@
-export function sort(input, data) {
-  console.log(input);
-
-  let sortedArray = [];
-
-  if (data.length > 1) {
-    const middleIndex = Math.floor(data.length / 2);
-    const leftSide = data.slice(0, middleIndex);
-    const rightSide = data.slice;
+export function sortRecipes(input, data) {
+  let sortedRecipes = [];
+  for (let i = 0; i < data.length; i++) {
+    const { ingredients, name, description } = data[i];
+    if (name.includes(input)) {
+      if (!sortedRecipes.includes(name[i])) {
+        sortedRecipes.push(data[i]);
+      }
+    }
+    if (description.includes(input)) {
+      if (!sortedRecipes.includes(data[i])) {
+        sortedRecipes.push(data[i]);
+      }
+    }
+    for (let j = 0; j < ingredients.length; j++) {
+      const { ingredient } = ingredients[j];
+      if (ingredient.includes(input)) {
+        if (!sortedRecipes.includes(data[i])) {
+          sortedRecipes.push(data[i]);
+        }
+      }
+    }
   }
+  return sortedRecipes;
 }
