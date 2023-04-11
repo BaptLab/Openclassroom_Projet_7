@@ -7,6 +7,11 @@ import { ingredientPattern } from "./scripts/factories/ingredientPattern.js";
 import { devicePattern } from "./scripts/factories/devicesPattern.js";
 import { sortByInput } from "./scripts/algorithms/sort.js";
 import { ustensilsPattern } from "./scripts/factories/ustensilsPattern.js";
+import {
+  sortDevicesTags,
+  sortIngredientsTags,
+  sortUstensilsTags,
+} from "./scripts/algorithms/sortTags.js";
 
 function main() {
   recipesPattern(data);
@@ -17,14 +22,78 @@ function main() {
   devices(data);
   TagsDisplayEvent();
   TagPicking();
+  tagSearchEvent(data);
 }
 
 main();
+
+function tagSearchEvent(data) {
+  document.querySelector("#ingredients").addEventListener("input", (e) => {
+    let input = e.target.value.trim().toLowerCase();
+    if (input.length >= 1) {
+      let searchInput = document.querySelector("#search-input").value.trim();
+      if (searchInput.length >= 3) {
+        ingredientPattern(sortIngredientsTags(input, sortByInput(searchInput, data)));
+      } else {
+        ingredientPattern(sortIngredientsTags(input, data));
+      }
+    } else {
+      let searchInput = document.querySelector("#search-input").value.trim();
+      if (searchInput.length >= 3) {
+        ingredientPattern(sortIngredientsTags(input, sortByInput(searchInput, data)));
+      } else {
+        ingredientPattern(sortIngredientsTags(input, data));
+      }
+    }
+  });
+
+  document.querySelector("#devices").addEventListener("input", (e) => {
+    let input = e.target.value.trim().toLowerCase();
+    if (input.length >= 1) {
+      let searchInput = document.querySelector("#search-input").value.trim();
+      if (searchInput.length >= 3) {
+        devicePattern(sortDevicesTags(input, sortByInput(searchInput, data)));
+      } else {
+        devicePattern(sortDevicesTags(input, data));
+      }
+    } else {
+      let searchInput = document.querySelector("#search-input").value.trim();
+      if (searchInput.length >= 3) {
+        devicePattern(sortDevicesTags(input, sortByInput(searchInput, data)));
+      } else {
+        devicePattern(sortDevicesTags(input, data));
+      }
+    }
+  });
+
+  document.querySelector("#ustensils").addEventListener("input", (e) => {
+    let input = e.target.value.trim().toLowerCase();
+    if (input.length >= 1) {
+      let searchInput = document.querySelector("#search-input").value.trim();
+      if (searchInput.length >= 3) {
+        ustensilsPattern(sortUstensilsTags(input, sortByInput(searchInput, data)));
+      } else {
+        ustensilsPattern(sortUstensilsTags(input, data));
+      }
+    } else {
+      let searchInput = document.querySelector("#search-input").value.trim();
+      if (searchInput.length >= 3) {
+        ustensilsPattern(sortUstensilsTags(input, sortByInput(searchInput, data)));
+      } else {
+        ustensilsPattern(sortUstensilsTags(input, data));
+      }
+    }
+  });
+}
 
 //Event - input barre de recherche
 //Met à jour les recettes et les tags disponibles conformément à l'input
 document.querySelector("#search-input").addEventListener("input", (e) => {
   let input = e.target.value.trim().toLowerCase();
+  searchbarSort(input);
+});
+
+function searchbarSort(input) {
   if (input.length > 2) {
     let sortedrecipes = sortByInput(input, data);
     recipesPattern(sortedrecipes);
@@ -35,8 +104,12 @@ document.querySelector("#search-input").addEventListener("input", (e) => {
   } else {
     //En dessous de 3 caractère, on affiche toutes les recettes
     recipesPattern(data);
+    ingredientPattern(ingredients(data));
+    devicePattern(devices(data));
+    ustensilsPattern(ustensils(data));
+    TagPicking();
   }
-});
+}
 
 //A refactoriser pour éviter les duplications
 function TagsDisplayEvent() {

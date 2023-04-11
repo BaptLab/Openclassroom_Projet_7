@@ -205,6 +205,10 @@ header img {
   flex: auto;
 }
 
+#sort-section #tags-selection .tag-selector .ingredients-container #ingredients-error {
+  display: flex;
+}
+
 #sort-section #tags-selection .tag-selector .devices-container {
   position: absolute;
   border-radius: 0px 0px 5px 5px;
@@ -293,6 +297,13 @@ header img {
   align-items: center;
 }
 
+#sort-section #tags-selection .tag-selector .tag-error {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  margin-bottom: 5px;
+}
+
 #sort-section #tags-selection .tag-selector .tag:hover {
   filter: brightness(110%);
   cursor: pointer;
@@ -332,6 +343,12 @@ header img {
   flex-wrap: wrap;
   width: 100%;
   gap: 40px;
+  margin-bottom: 40px;
+}
+
+#recipes-container::after {
+  content: "";
+  flex: auto;
 }
 
 #recipes-container article {
