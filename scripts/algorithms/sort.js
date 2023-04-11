@@ -22,6 +22,5 @@ export function sortByInput(input, data) {
       }
     }
   }
-  console.log(sortedRecipes);
   return sortedRecipes;
 }

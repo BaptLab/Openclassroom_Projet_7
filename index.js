@@ -26,10 +26,11 @@ main();
 document.querySelector("#search-input").addEventListener("input", (e) => {
   let input = e.target.value.trim().toLowerCase();
   if (input.length > 2) {
-    recipesPattern(sortByInput(input, data));
-    ingredientPattern(ingredients(sortByInput(input, data)));
-    devicePattern(devices(sortByInput(input, data)));
-    ustensilsPattern(ustensils(sortByInput(input, data)));
+    let sortedrecipes = sortByInput(input, data);
+    recipesPattern(sortedrecipes);
+    ingredientPattern(ingredients(sortedrecipes));
+    devicePattern(devices(sortedrecipes));
+    ustensilsPattern(ustensils(sortedrecipes));
     TagPicking();
   } else {
     //En dessous de 3 caractère, on affiche toutes les recettes
