@@ -1,5 +1,12 @@
 export function recipesPattern(recipes) {
-  console.log(recipes);
+  //Message d'erreur
+  if (recipes.length === 0) {
+    document.querySelector("#error-section").style.display = "flex";
+  } else {
+    document.querySelector("#error-section").style.display = "none";
+  }
+
+  //Affichage des recettes
   const recipeContainer = document.querySelector("#recipes-container");
   recipeContainer.innerHTML = "";
   for (let i = 0; i < recipes.length; i++) {

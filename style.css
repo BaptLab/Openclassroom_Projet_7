@@ -310,6 +310,22 @@ header img {
   background-color: #ed6454;
 }
 
+#error-section {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+  flex-direction: column;
+}
+
+#error-section .error-msg {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin: 0px 175px;
+  text-align: center;
+  margin-bottom: 13px;
+}
+
 #recipes-container {
   display: flex;
   justify-content: space-between;

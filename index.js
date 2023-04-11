@@ -1,11 +1,11 @@
-import data, { recipes } from "./data/recipes.js";
+import data from "./data/recipes.js";
 import { recipesPattern } from "./scripts/factories/recipePattern.js";
 import { ingredients } from "./scripts/algorithms/ingredients.js";
 import { ustensils } from "./scripts/algorithms/ustensils.js";
 import { devices } from "./scripts/algorithms/devices.js";
 import { ingredientPattern } from "./scripts/factories/ingredientPattern.js";
 import { devicePattern } from "./scripts/factories/devicesPattern.js";
-import { sortRecipes } from "./scripts/algorithms/sort.js";
+import { sortByInput } from "./scripts/algorithms/sort.js";
 import { ustensilsPattern } from "./scripts/factories/ustensilsPattern.js";
 
 function main() {
@@ -22,10 +22,18 @@ function main() {
 main();
 
 //Event - input barre de recherche
+//Met à jour les recettes et les tags disponibles conformément à l'input
 document.querySelector("#search-input").addEventListener("input", (e) => {
-  let input = e.target.value;
+  let input = e.target.value.trim().toLowerCase();
   if (input.length > 2) {
-    recipesPattern(sortRecipes(input, data));
+    recipesPattern(sortByInput(input, data));
+    ingredientPattern(ingredients(sortByInput(input, data)));
+    devicePattern(devices(sortByInput(input, data)));
+    ustensilsPattern(ustensils(sortByInput(input, data)));
+    TagPicking();
+  } else {
+    //En dessous de 3 caractère, on affiche toutes les recettes
+    recipesPattern(data);
   }
 });
 
