@@ -1,25 +1,27 @@
 import data from "./data/recipes.js";
 import { recipesPattern } from "./scripts/factories/recipePattern.js";
-import { ingredients } from "./scripts/algorithms/ingredients.js";
-import { ustensils } from "./scripts/algorithms/ustensils.js";
-import { devices } from "./scripts/algorithms/devices.js";
-import { ingredientPattern } from "./scripts/factories/ingredientPattern.js";
-import { devicePattern } from "./scripts/factories/devicesPattern.js";
-import { sortByInput } from "./scripts/algorithms/sort.js";
-import { ustensilsPattern } from "./scripts/factories/ustensilsPattern.js";
+import {
+  getDevices,
+  getUstensils,
+  getIngredients,
+} from "./scripts/algorithms/getTags.js";
+import { sortByInput } from "./scripts/algorithms/sortRecipes.js";
 import {
   sortDevicesTags,
   sortIngredientsTags,
   sortUstensilsTags,
 } from "./scripts/algorithms/sortTags.js";
+import {
+  ingredientTagPattern,
+  ustensilsTagPattern,
+  deviceTagPattern,
+} from "./scripts/factories/tagPatterns.js";
 
 function main() {
   recipesPattern(data);
-  ingredientPattern(ingredients(data));
-  devicePattern(devices(data));
-  ustensilsPattern(ustensils(data));
-  ustensils(data);
-  devices(data);
+  ingredientTagPattern(getIngredients(data));
+  deviceTagPattern(getDevices(data));
+  ustensilsTagPattern(getUstensils(data));
   TagsDisplayEvent();
   TagPicking();
   tagSearchEvent(data);
@@ -33,16 +35,16 @@ function tagSearchEvent(data) {
     if (input.length >= 1) {
       let searchInput = document.querySelector("#search-input").value.trim();
       if (searchInput.length >= 3) {
-        ingredientPattern(sortIngredientsTags(input, sortByInput(searchInput, data)));
+        ingredientTagPattern(sortIngredientsTags(input, sortByInput(searchInput, data)));
       } else {
-        ingredientPattern(sortIngredientsTags(input, data));
+        ingredientTagPattern(sortIngredientsTags(input, data));
       }
     } else {
       let searchInput = document.querySelector("#search-input").value.trim();
       if (searchInput.length >= 3) {
-        ingredientPattern(sortIngredientsTags(input, sortByInput(searchInput, data)));
+        ingredientTagPattern(sortIngredientsTags(input, sortByInput(searchInput, data)));
       } else {
-        ingredientPattern(sortIngredientsTags(input, data));
+        ingredientTagPattern(sortIngredientsTags(input, data));
       }
     }
   });
@@ -52,16 +54,16 @@ function tagSearchEvent(data) {
     if (input.length >= 1) {
       let searchInput = document.querySelector("#search-input").value.trim();
       if (searchInput.length >= 3) {
-        devicePattern(sortDevicesTags(input, sortByInput(searchInput, data)));
+        deviceTagPattern(sortDevicesTags(input, sortByInput(searchInput, data)));
       } else {
-        devicePattern(sortDevicesTags(input, data));
+        deviceTagPattern(sortDevicesTags(input, data));
       }
     } else {
       let searchInput = document.querySelector("#search-input").value.trim();
       if (searchInput.length >= 3) {
-        devicePattern(sortDevicesTags(input, sortByInput(searchInput, data)));
+        deviceTagPattern(sortDevicesTags(input, sortByInput(searchInput, data)));
       } else {
-        devicePattern(sortDevicesTags(input, data));
+        deviceTagPattern(sortDevicesTags(input, data));
       }
     }
   });
@@ -71,16 +73,16 @@ function tagSearchEvent(data) {
     if (input.length >= 1) {
       let searchInput = document.querySelector("#search-input").value.trim();
       if (searchInput.length >= 3) {
-        ustensilsPattern(sortUstensilsTags(input, sortByInput(searchInput, data)));
+        ustensilsTagPattern(sortUstensilsTags(input, sortByInput(searchInput, data)));
       } else {
-        ustensilsPattern(sortUstensilsTags(input, data));
+        ustensilsTagPattern(sortUstensilsTags(input, data));
       }
     } else {
       let searchInput = document.querySelector("#search-input").value.trim();
       if (searchInput.length >= 3) {
-        ustensilsPattern(sortUstensilsTags(input, sortByInput(searchInput, data)));
+        ustensilsTagPattern(sortUstensilsTags(input, sortByInput(searchInput, data)));
       } else {
-        ustensilsPattern(sortUstensilsTags(input, data));
+        ustensilsTagPattern(sortUstensilsTags(input, data));
       }
     }
   });
@@ -97,16 +99,16 @@ function searchbarSort(input) {
   if (input.length > 2) {
     let sortedrecipes = sortByInput(input, data);
     recipesPattern(sortedrecipes);
-    ingredientPattern(ingredients(sortedrecipes));
-    devicePattern(devices(sortedrecipes));
-    ustensilsPattern(ustensils(sortedrecipes));
+    ingredientTagPattern(getIngredients(sortedrecipes));
+    deviceTagPattern(getDevices(sortedrecipes));
+    ustensilsTagPattern(getUstensils(sortedrecipes));
     TagPicking();
   } else {
     //En dessous de 3 caractère, on affiche toutes les recettes
     recipesPattern(data);
-    ingredientPattern(ingredients(data));
-    devicePattern(devices(data));
-    ustensilsPattern(ustensils(data));
+    ingredientTagPattern(getIngredients(data));
+    deviceTagPattern(getDevices(data));
+    ustensilsTagPattern(getUstensils(data));
     TagPicking();
   }
 }
