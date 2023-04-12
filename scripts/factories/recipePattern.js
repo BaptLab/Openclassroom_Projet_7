@@ -1,9 +1,46 @@
-export function recipesPattern(recipes) {
+export function recipesPattern(recipes, howManyTagOn) {
   //Message d'erreur
   if (recipes.length === 0) {
     document.querySelector("#error-section").style.display = "flex";
   } else {
     document.querySelector("#error-section").style.display = "none";
+  }
+
+  if (howManyTagOn >= 1) {
+    let tagOn = document.querySelectorAll(".tag-picked-container .text");
+    let newArray = [];
+    checkForTags(recipes, tagOn);
+    function checkForTags(recipes, tagOn) {
+      for (let i = 0; i < recipes.length; i++) {
+        let hasAllTags = true;
+        for (let k = 0; k < tagOn.length; k++) {
+          const { appliance, ustensils, ingredients } = recipes[i];
+          let tagMatches = false;
+          for (let l = 0; l < ingredients.length; l++) {
+            if (ingredients[l].ingredient === tagOn[k].innerText) {
+              tagMatches = true;
+            }
+          }
+          for (let l = 0; l < ustensils.length; l++) {
+            if (ustensils[l] === tagOn[k].innerText) {
+              tagMatches = true;
+            }
+          }
+          if (appliance === tagOn[k].innerText) {
+            tagMatches = true;
+          }
+          if (!tagMatches) {
+            hasAllTags = false;
+            break;
+          }
+        }
+        if (hasAllTags) {
+          newArray.push(recipes[i]);
+        }
+      }
+    }
+    console.log(newArray);
+    recipes = newArray;
   }
 
   //Affichage des recettes

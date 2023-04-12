@@ -17,13 +17,14 @@ import {
   deviceTagPattern,
 } from "./scripts/factories/tagPatterns.js";
 
+var howManyTagOn = 0;
+
 function main() {
-  recipesPattern(data);
+  recipesPattern(data, howManyTagOn);
   ingredientTagPattern(getIngredients(data));
   deviceTagPattern(getDevices(data));
   ustensilsTagPattern(getUstensils(data));
   TagsDisplayEvent();
-  TagPicking();
   tagSearchEvent(data);
 }
 
@@ -47,6 +48,7 @@ function tagSearchEvent(data) {
         ingredientTagPattern(sortIngredientsTags(input, data));
       }
     }
+    TagPickingEvent();
   });
 
   document.querySelector("#devices").addEventListener("input", (e) => {
@@ -66,6 +68,7 @@ function tagSearchEvent(data) {
         deviceTagPattern(sortDevicesTags(input, data));
       }
     }
+    TagPickingEvent();
   });
 
   document.querySelector("#ustensils").addEventListener("input", (e) => {
@@ -85,6 +88,7 @@ function tagSearchEvent(data) {
         ustensilsTagPattern(sortUstensilsTags(input, data));
       }
     }
+    TagPickingEvent();
   });
 }
 
@@ -97,19 +101,19 @@ document.querySelector("#search-input").addEventListener("input", (e) => {
 
 function searchbarSort(input) {
   if (input.length > 2) {
-    let sortedrecipes = sortByInput(input, data);
-    recipesPattern(sortedrecipes);
+    let sortedrecipes = sortByInput(data);
+    recipesPattern(sortedrecipes, howManyTagOn);
     ingredientTagPattern(getIngredients(sortedrecipes));
     deviceTagPattern(getDevices(sortedrecipes));
     ustensilsTagPattern(getUstensils(sortedrecipes));
-    TagPicking();
+    TagPickingEvent();
   } else {
     //En dessous de 3 caractère, on affiche toutes les recettes
-    recipesPattern(data);
+    recipesPattern(data, howManyTagOn);
     ingredientTagPattern(getIngredients(data));
     deviceTagPattern(getDevices(data));
     ustensilsTagPattern(getUstensils(data));
-    TagPicking();
+    TagPickingEvent();
   }
 }
 
@@ -189,14 +193,16 @@ function TagsDisplayEvent() {
       ustensilList = false;
     }
   });
+  TagPickingEvent();
 }
 
 //refactoriser pour éviter la duplication
-function TagPicking() {
+function TagPickingEvent() {
   let ingredientsTags = document.querySelectorAll(".ingredients-container .tag");
   let tagDisplaySection = document.querySelector("#tags-displaying");
   for (let i = 0; i < ingredientsTags.length; i++) {
     ingredientsTags[i].addEventListener("click", (e) => {
+      howManyTagOn++;
       let tagPicked = document.createElement("span");
       tagPicked.classList.add("text");
       tagPicked.innerText = e.target.innerText;
@@ -208,8 +214,11 @@ function TagPicking() {
       tagDisplaySection.appendChild(tagPickedContainer);
       tagPickedContainer.appendChild(tagPicked);
       tagPickedContainer.appendChild(deleteIcone);
+      recipesPattern(sortByInput(data), howManyTagOn);
       deleteIcone.addEventListener("click", (e) => {
+        howManyTagOn--;
         e.target.parentNode.remove();
+        recipesPattern(sortByInput(data), howManyTagOn);
       });
     });
   }
@@ -217,6 +226,7 @@ function TagPicking() {
   let devicesTags = document.querySelectorAll(".devices-container .tag");
   for (let i = 0; i < devicesTags.length; i++) {
     devicesTags[i].addEventListener("click", (e) => {
+      howManyTagOn++;
       let tagPicked = document.createElement("span");
       tagPicked.classList.add("text");
       tagPicked.innerText = e.target.innerText;
@@ -228,8 +238,11 @@ function TagPicking() {
       tagDisplaySection.appendChild(tagPickedContainer);
       tagPickedContainer.appendChild(tagPicked);
       tagPickedContainer.appendChild(deleteIcone);
+      recipesPattern(sortByInput(data), howManyTagOn);
       deleteIcone.addEventListener("click", (e) => {
+        howManyTagOn--;
         e.target.parentNode.remove();
+        recipesPattern(sortByInput(data), howManyTagOn);
       });
     });
   }
@@ -237,6 +250,7 @@ function TagPicking() {
   let ustensilsTags = document.querySelectorAll(".ustensils-container .tag");
   for (let i = 0; i < ustensilsTags.length; i++) {
     ustensilsTags[i].addEventListener("click", (e) => {
+      howManyTagOn++;
       let tagPicked = document.createElement("span");
       tagPicked.classList.add("text");
       tagPicked.innerText = e.target.innerText;
@@ -248,8 +262,11 @@ function TagPicking() {
       tagDisplaySection.appendChild(tagPickedContainer);
       tagPickedContainer.appendChild(tagPicked);
       tagPickedContainer.appendChild(deleteIcone);
+      recipesPattern(sortByInput(data), howManyTagOn);
       deleteIcone.addEventListener("click", (e) => {
+        howManyTagOn--;
         e.target.parentNode.remove();
+        recipesPattern(sortByInput(data), howManyTagOn);
       });
     });
   }
