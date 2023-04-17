@@ -1,6 +1,6 @@
 //Fonction qui retourne un tableau avec l'input présent dans le titre, les ingrédients ou la description de la recette
 export function sortByInput(data) {
-  let input = document.querySelector("#search-input").value.trim().toLowerCase();
+  let input = document.querySelector("#search-input").value.toLowerCase();
   let sortedRecipes = [];
   for (let i = 0; i < data.length; i++) {
     const { ingredients, name, description } = data[i];

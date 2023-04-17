@@ -10,6 +10,7 @@ export function recipesPattern(recipes, howManyTagOn) {
     let tagOn = document.querySelectorAll(".tag-picked-container .text");
     let newArray = [];
     checkForTags(recipes, tagOn);
+
     function checkForTags(recipes, tagOn) {
       for (let i = 0; i < recipes.length; i++) {
         let hasAllTags = true;
@@ -39,7 +40,6 @@ export function recipesPattern(recipes, howManyTagOn) {
         }
       }
     }
-    console.log(newArray);
     recipes = newArray;
   }
 

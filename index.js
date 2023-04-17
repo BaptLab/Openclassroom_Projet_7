@@ -32,18 +32,18 @@ main();
 
 function tagSearchEvent(data) {
   document.querySelector("#ingredients").addEventListener("input", (e) => {
-    let input = e.target.value.trim().toLowerCase();
+    let input = e.target.value.toLowerCase();
     if (input.length >= 1) {
-      let searchInput = document.querySelector("#search-input").value.trim();
+      let searchInput = document.querySelector("#search-input").value;
       if (searchInput.length >= 3) {
-        ingredientTagPattern(sortIngredientsTags(input, sortByInput(searchInput, data)));
+        ingredientTagPattern(sortIngredientsTags(input, sortByInput(data)));
       } else {
         ingredientTagPattern(sortIngredientsTags(input, data));
       }
     } else {
-      let searchInput = document.querySelector("#search-input").value.trim();
+      let searchInput = document.querySelector("#search-input").value;
       if (searchInput.length >= 3) {
-        ingredientTagPattern(sortIngredientsTags(input, sortByInput(searchInput, data)));
+        ingredientTagPattern(sortIngredientsTags(input, sortByInput(data)));
       } else {
         ingredientTagPattern(sortIngredientsTags(input, data));
       }
@@ -52,18 +52,18 @@ function tagSearchEvent(data) {
   });
 
   document.querySelector("#devices").addEventListener("input", (e) => {
-    let input = e.target.value.trim().toLowerCase();
+    let input = e.target.value.toLowerCase();
     if (input.length >= 1) {
-      let searchInput = document.querySelector("#search-input").value.trim();
+      let searchInput = document.querySelector("#search-input").value;
       if (searchInput.length >= 3) {
-        deviceTagPattern(sortDevicesTags(input, sortByInput(searchInput, data)));
+        deviceTagPattern(sortDevicesTags(input, sortByInput(data)));
       } else {
         deviceTagPattern(sortDevicesTags(input, data));
       }
     } else {
-      let searchInput = document.querySelector("#search-input").value.trim();
+      let searchInput = document.querySelector("#search-input").value;
       if (searchInput.length >= 3) {
-        deviceTagPattern(sortDevicesTags(input, sortByInput(searchInput, data)));
+        deviceTagPattern(sortDevicesTags(input, sortByInput(data)));
       } else {
         deviceTagPattern(sortDevicesTags(input, data));
       }
@@ -72,18 +72,18 @@ function tagSearchEvent(data) {
   });
 
   document.querySelector("#ustensils").addEventListener("input", (e) => {
-    let input = e.target.value.trim().toLowerCase();
+    let input = e.target.value.toLowerCase();
     if (input.length >= 1) {
-      let searchInput = document.querySelector("#search-input").value.trim();
+      let searchInput = document.querySelector("#search-input").value;
       if (searchInput.length >= 3) {
-        ustensilsTagPattern(sortUstensilsTags(input, sortByInput(searchInput, data)));
+        ustensilsTagPattern(sortUstensilsTags(input, sortByInput(data)));
       } else {
         ustensilsTagPattern(sortUstensilsTags(input, data));
       }
     } else {
-      let searchInput = document.querySelector("#search-input").value.trim();
+      let searchInput = document.querySelector("#search-input").value;
       if (searchInput.length >= 3) {
-        ustensilsTagPattern(sortUstensilsTags(input, sortByInput(searchInput, data)));
+        ustensilsTagPattern(sortUstensilsTags(input, sortByInput(data)));
       } else {
         ustensilsTagPattern(sortUstensilsTags(input, data));
       }
@@ -95,7 +95,7 @@ function tagSearchEvent(data) {
 //Event - input barre de recherche
 //Met à jour les recettes et les tags disponibles conformément à l'input
 document.querySelector("#search-input").addEventListener("input", (e) => {
-  let input = e.target.value.trim().toLowerCase();
+  let input = e.target.value.toLowerCase();
   searchbarSort(input);
 });
 
@@ -173,6 +173,9 @@ function TagsDisplayEvent() {
       ingredientsBtn.classList.remove("open");
       ingredients.classList.remove("extended");
       ingredientList = false;
+      document.querySelector("#ingredients").value = "";
+      ingredientTagPattern(getIngredients(sortByInput(data)));
+      TagPickingEvent();
     }
   });
 
@@ -182,6 +185,8 @@ function TagsDisplayEvent() {
       devicesBtn.classList.remove("open");
       devices.classList.remove("extended");
       deviceList = false;
+      document.querySelector("#devices").value = "";
+      deviceTagPattern(getDevices(sortByInput(data)));
     }
   });
 
@@ -191,9 +196,10 @@ function TagsDisplayEvent() {
       ustensilsBtn.classList.remove("open");
       ustensils.classList.remove("extended");
       ustensilList = false;
+      document.querySelector("#ustensils").value = "";
+      ustensilsTagPattern(getUstensils(sortByInput(data)));
     }
   });
-  TagPickingEvent();
 }
 
 //refactoriser pour éviter la duplication
