@@ -17,8 +17,7 @@ export function recipesPattern(recipes, howManyTagOn) {
   const recipeContainer = document.querySelector("#recipes-container");
   recipeContainer.innerHTML = "";
   for (let i = 0; i < recipes.length; i++) {
-    const { id, name, servings, ingredients, time, description, appliance, ustensils } =
-      recipes[i];
+    const { id, name, ingredients, time, description } = recipes[i];
 
     const recipeArticle = document.createElement("article");
     recipeArticle.setAttribute("id", id);
@@ -54,7 +53,6 @@ export function recipesPattern(recipes, howManyTagOn) {
     descriptionSection.appendChild(contentDescription);
 
     for (let j = 0; j < ingredients.length; j++) {
-      const { ingredient, quantity, unit } = ingredients[j];
       const ingredientLine = document.createElement("div");
       ingredientLine.classList.add("ingredient-line");
       const ingredientName = document.createElement("span");

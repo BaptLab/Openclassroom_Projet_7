@@ -54,7 +54,7 @@ header img {
 #sort-section #search-bar #search-input::placeholder {
   color: black;
   opacity: 0.25;
-  font-family: 1.125em;
+  font-size: 1.125em;
   font-weight: 400;
 }
 
@@ -154,7 +154,7 @@ header img {
   color: white;
   justify-content: space-between;
   font-weight: 700;
-  font-weight: 1.125em;
+  font-size: 1.125em;
   border: none;
 }
 
