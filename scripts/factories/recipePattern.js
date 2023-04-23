@@ -1,49 +1,19 @@
 export function recipesPattern(recipes, howManyTagOn) {
-  //Message d'erreur
+  //Message d'erreur si aucune recette ne correspond à l'input
   if (recipes.length === 0) {
     document.querySelector("#error-section").style.display = "flex";
   } else {
     document.querySelector("#error-section").style.display = "none";
   }
 
+  //on vérifie si au moins 1 tag est actif, si oui, on lance le fonction de tri par tag
   if (howManyTagOn >= 1) {
     let tagOn = document.querySelectorAll(".tag-picked-container .text");
     let newArray = [];
-    checkForTags(recipes, tagOn);
-
-    function checkForTags(recipes, tagOn) {
-      for (let i = 0; i < recipes.length; i++) {
-        let hasAllTags = true;
-        for (let k = 0; k < tagOn.length; k++) {
-          const { appliance, ustensils, ingredients } = recipes[i];
-          let tagMatches = false;
-          for (let l = 0; l < ingredients.length; l++) {
-            if (ingredients[l].ingredient === tagOn[k].innerText) {
-              tagMatches = true;
-            }
-          }
-          for (let l = 0; l < ustensils.length; l++) {
-            if (ustensils[l] === tagOn[k].innerText) {
-              tagMatches = true;
-            }
-          }
-          if (appliance === tagOn[k].innerText) {
-            tagMatches = true;
-          }
-          if (!tagMatches) {
-            hasAllTags = false;
-            break;
-          }
-        }
-        if (hasAllTags) {
-          newArray.push(recipes[i]);
-        }
-      }
-    }
-    recipes = newArray;
+    recipes = checkForTags(recipes, tagOn, newArray);
   }
 
-  //Affichage des recettes
+  //Affichage des recettes (prétrié ou non selon les tags actifs)
   const recipeContainer = document.querySelector("#recipes-container");
   recipeContainer.innerHTML = "";
   for (let i = 0; i < recipes.length; i++) {
@@ -120,4 +90,36 @@ export function recipesPattern(recipes, howManyTagOn) {
 
     recipeContainer.appendChild(recipeArticle);
   }
+}
+
+//Fonction qui vérifie le nombre de tags et qui trie les recettes en fonction
+function checkForTags(recipes, tagOn, newArray) {
+  for (let i = 0; i < recipes.length; i++) {
+    let hasAllTags = true;
+    for (let k = 0; k < tagOn.length; k++) {
+      const { appliance, ustensils, ingredients } = recipes[i];
+      let tagMatches = false;
+      for (let l = 0; l < ingredients.length; l++) {
+        if (ingredients[l].ingredient === tagOn[k].innerText) {
+          tagMatches = true;
+        }
+      }
+      for (let l = 0; l < ustensils.length; l++) {
+        if (ustensils[l] === tagOn[k].innerText) {
+          tagMatches = true;
+        }
+      }
+      if (appliance === tagOn[k].innerText) {
+        tagMatches = true;
+      }
+      if (!tagMatches) {
+        hasAllTags = false;
+        break;
+      }
+    }
+    if (hasAllTags) {
+      newArray.push(recipes[i]);
+    }
+  }
+  return newArray;
 }

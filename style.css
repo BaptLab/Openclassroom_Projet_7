@@ -191,7 +191,6 @@ header img {
   left: 0;
   display: none;
   flex-wrap: wrap;
-  justify-content: space-between;
   padding: 10px 0px;
   font-weight: 400;
   overflow: hidden;
@@ -219,7 +218,6 @@ header img {
   left: 0;
   display: none;
   flex-wrap: wrap;
-  justify-content: space-between;
   padding: 10px 0px;
   font-weight: 400;
   overflow: hidden;
@@ -243,7 +241,6 @@ header img {
   left: 0;
   display: none;
   flex-wrap: wrap;
-  justify-content: space-between;
   padding: 10px 0px;
   font-weight: 400;
   overflow: hidden;
@@ -339,7 +336,6 @@ header img {
 
 #recipes-container {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
   gap: 40px;
