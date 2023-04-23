@@ -200,10 +200,10 @@ header img {
   background-color: #3282f7;
 }
 
-#sort-section #tags-selection .tag-selector .ingredients-container::after {
+/* #sort-section #tags-selection .tag-selector .ingredients-container::after {
   content: "";
   flex: auto;
-}
+} */
 
 #sort-section #tags-selection .tag-selector .ingredients-container #ingredients-error {
   display: flex;
@@ -228,10 +228,10 @@ header img {
   background-color: #68d9a4;
 }
 
-#sort-section #tags-selection .tag-selector .devices-container::after {
+/* #sort-section #tags-selection .tag-selector .devices-container::after {
   content: "";
   flex: auto;
-}
+} */
 
 #sort-section #tags-selection .tag-selector .ustensils-container {
   position: absolute;
@@ -252,10 +252,10 @@ header img {
   background-color: #ed6454;
 }
 
-#sort-section #tags-selection .tag-selector .ustensils-container::after {
+/* #sort-section #tags-selection .tag-selector .ustensils-container::after {
   content: "";
   flex: auto;
-}
+} */
 
 #sort-section #tags-selection .tag-selector .extended {
   transition-duration: 0.5s;
@@ -346,11 +346,11 @@ header img {
   margin-bottom: 40px;
 }
 
-#recipes-container::after {
+/* #recipes-container::after {
   content: "";
   flex: auto;
 }
-
+ */
 #recipes-container article {
   height: auto;
   width: 30%;

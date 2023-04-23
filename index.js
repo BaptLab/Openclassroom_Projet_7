@@ -26,6 +26,8 @@ function main() {
   ustensilsTagPattern(getUstensils(data));
   TagsDisplayEvent();
   tagSearchEvent(data);
+  /*   TagPickingEvent();
+   */
 }
 
 main();
@@ -106,14 +108,12 @@ function searchbarSort(input) {
     ingredientTagPattern(getIngredients(sortedrecipes));
     deviceTagPattern(getDevices(sortedrecipes));
     ustensilsTagPattern(getUstensils(sortedrecipes));
-    TagPickingEvent();
   } else {
     //En dessous de 3 caractère, on affiche toutes les recettes
     recipesPattern(data, howManyTagOn);
     ingredientTagPattern(getIngredients(data));
     deviceTagPattern(getDevices(data));
     ustensilsTagPattern(getUstensils(data));
-    TagPickingEvent();
   }
 }
 
@@ -128,6 +128,7 @@ function TagsDisplayEvent() {
       ingredients.classList.add("extended");
       ingredientsBtn.classList.add("open");
       ingredientList = true;
+      TagPickingEvent();
     } else {
       ingredientsBtn.classList.remove("open");
       ingredients.classList.remove("extended");
@@ -144,6 +145,7 @@ function TagsDisplayEvent() {
       devices.classList.add("extended");
       devicesBtn.classList.add("open");
       deviceList = true;
+      TagPickingEvent();
     } else {
       devicesBtn.classList.remove("open");
       devices.classList.remove("extended");
@@ -160,6 +162,7 @@ function TagsDisplayEvent() {
       ustensils.classList.add("extended");
       ustensilsBtn.classList.add("open");
       ustensilList = true;
+      TagPickingEvent();
     } else {
       ustensilsBtn.classList.remove("open");
       ustensils.classList.remove("extended");
@@ -175,7 +178,6 @@ function TagsDisplayEvent() {
       ingredientList = false;
       document.querySelector("#ingredients").value = "";
       ingredientTagPattern(getIngredients(sortByInput(data)));
-      TagPickingEvent();
     }
   });
 
