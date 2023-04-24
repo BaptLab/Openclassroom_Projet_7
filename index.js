@@ -26,8 +26,6 @@ function main() {
   ustensilsTagPattern(getUstensils(data));
   TagsDisplayEvent();
   tagSearchEvent(data);
-  /*   TagPickingEvent();
-   */
 }
 
 main();
@@ -122,53 +120,17 @@ function TagsDisplayEvent() {
   let ingredientList = false;
   let ingredients = document.querySelector(".ingredients-container");
   let ingredientsBtn = document.querySelector(".ingredients");
-
-  document.querySelector("#ingredients").addEventListener("click", () => {
-    if (ingredientList === false) {
-      ingredients.classList.add("extended");
-      ingredientsBtn.classList.add("open");
-      ingredientList = true;
-      TagPickingEvent();
-    } else {
-      ingredientsBtn.classList.remove("open");
-      ingredients.classList.remove("extended");
-      ingredientList = false;
-    }
-  });
+  tagEvent(ingredients, ingredientList, ingredientsBtn);
 
   let deviceList = false;
   let devices = document.querySelector(".devices-container");
   let devicesBtn = document.querySelector(".devices");
-
-  document.querySelector("#devices").addEventListener("click", () => {
-    if (deviceList === false) {
-      devices.classList.add("extended");
-      devicesBtn.classList.add("open");
-      deviceList = true;
-      TagPickingEvent();
-    } else {
-      devicesBtn.classList.remove("open");
-      devices.classList.remove("extended");
-      deviceList = false;
-    }
-  });
+  tagEvent(devices, deviceList, devicesBtn);
 
   let ustensilList = false;
   let ustensils = document.querySelector(".ustensils-container");
   let ustensilsBtn = document.querySelector(".ustensils");
-
-  document.querySelector("#ustensils").addEventListener("click", () => {
-    if (ustensilList === false) {
-      ustensils.classList.add("extended");
-      ustensilsBtn.classList.add("open");
-      ustensilList = true;
-      TagPickingEvent();
-    } else {
-      ustensilsBtn.classList.remove("open");
-      ustensils.classList.remove("extended");
-      ustensilList = false;
-    }
-  });
+  tagEvent(ustensils, ustensilList, ustensilsBtn);
 
   document.querySelector("body").addEventListener("click", (e) => {
     let tagSelector = e.target.parentNode;
@@ -202,80 +164,59 @@ function TagsDisplayEvent() {
       ustensilsTagPattern(getUstensils(sortByInput(data)));
     }
   });
+
+  function tagEvent(tags, tagsList, tagBtn) {
+    tagBtn.addEventListener("click", () => {
+      if (tagsList === false) {
+        tags.classList.add("extended");
+        tagBtn.classList.add("open");
+        tagsList = true;
+        TagPickingEvent();
+      } else {
+        tagBtn.classList.remove("open");
+        tags.classList.remove("extended");
+        tagsList = false;
+      }
+    });
+    return { tagBtn, tags, tagsList };
+  }
 }
 
 //refactoriser pour éviter la duplication
 function TagPickingEvent() {
-  let ingredientsTags = document.querySelectorAll(".ingredients-container .tag");
   let tagDisplaySection = document.querySelector("#tags-displaying");
-  for (let i = 0; i < ingredientsTags.length; i++) {
-    ingredientsTags[i].addEventListener("click", (e) => {
-      howManyTagOn++;
-      let tagPicked = document.createElement("span");
-      tagPicked.classList.add("text");
-      tagPicked.innerText = e.target.innerText;
-      let tagPickedContainer = document.createElement("div");
-      let deleteIcone = document.createElement("span");
-      deleteIcone.classList.add("fa-regular", "fa-circle-xmark", "fa-lg", "close-icon");
-      tagPickedContainer.classList.add("tag-picked-container");
-      tagPickedContainer.classList.add("ingredients-tag");
-      tagDisplaySection.appendChild(tagPickedContainer);
-      tagPickedContainer.appendChild(tagPicked);
-      tagPickedContainer.appendChild(deleteIcone);
-      recipesPattern(sortByInput(data), howManyTagOn);
-      deleteIcone.addEventListener("click", (e) => {
-        howManyTagOn--;
-        e.target.parentNode.remove();
-        recipesPattern(sortByInput(data), howManyTagOn);
-      });
-    });
-  }
+
+  let ingredientsTags = document.querySelectorAll(".ingredients-container .tag");
+  tagPickingEvent(ingredientsTags, "ingredients-tag");
 
   let devicesTags = document.querySelectorAll(".devices-container .tag");
-  for (let i = 0; i < devicesTags.length; i++) {
-    devicesTags[i].addEventListener("click", (e) => {
-      howManyTagOn++;
-      let tagPicked = document.createElement("span");
-      tagPicked.classList.add("text");
-      tagPicked.innerText = e.target.innerText;
-      let tagPickedContainer = document.createElement("div");
-      let deleteIcone = document.createElement("span");
-      deleteIcone.classList.add("fa-regular", "fa-circle-xmark", "fa-lg", "close-icon");
-      tagPickedContainer.classList.add("tag-picked-container");
-      tagPickedContainer.classList.add("devices-tag");
-      tagDisplaySection.appendChild(tagPickedContainer);
-      tagPickedContainer.appendChild(tagPicked);
-      tagPickedContainer.appendChild(deleteIcone);
-      recipesPattern(sortByInput(data), howManyTagOn);
-      deleteIcone.addEventListener("click", (e) => {
-        howManyTagOn--;
-        e.target.parentNode.remove();
-        recipesPattern(sortByInput(data), howManyTagOn);
-      });
-    });
-  }
+  tagPickingEvent(devicesTags, "devices-tag");
 
   let ustensilsTags = document.querySelectorAll(".ustensils-container .tag");
-  for (let i = 0; i < ustensilsTags.length; i++) {
-    ustensilsTags[i].addEventListener("click", (e) => {
-      howManyTagOn++;
-      let tagPicked = document.createElement("span");
-      tagPicked.classList.add("text");
-      tagPicked.innerText = e.target.innerText;
-      let tagPickedContainer = document.createElement("div");
-      let deleteIcone = document.createElement("span");
-      deleteIcone.classList.add("fa-regular", "fa-circle-xmark", "fa-lg", "close-icon");
-      tagPickedContainer.classList.add("tag-picked-container");
-      tagPickedContainer.classList.add("ustensils-tag");
-      tagDisplaySection.appendChild(tagPickedContainer);
-      tagPickedContainer.appendChild(tagPicked);
-      tagPickedContainer.appendChild(deleteIcone);
-      recipesPattern(sortByInput(data), howManyTagOn);
-      deleteIcone.addEventListener("click", (e) => {
-        howManyTagOn--;
-        e.target.parentNode.remove();
+  tagPickingEvent(ustensilsTags, "ustensils-tag");
+
+  function tagPickingEvent(tags, className) {
+    for (let i = 0; i < tags.length; i++) {
+      tags[i].addEventListener("click", (e) => {
+        howManyTagOn++;
+        let tagPicked = document.createElement("span");
+        tagPicked.classList.add("text");
+        tagPicked.innerText = e.target.innerText;
+        let tagPickedContainer = document.createElement("div");
+        let deleteIcone = document.createElement("span");
+        deleteIcone.classList.add("fa-regular", "fa-circle-xmark", "fa-lg", "close-icon");
+        tagPickedContainer.classList.add("tag-picked-container");
+        tagPickedContainer.classList.add(className);
+        tagDisplaySection.appendChild(tagPickedContainer);
+        tagPickedContainer.appendChild(tagPicked);
+        tagPickedContainer.appendChild(deleteIcone);
         recipesPattern(sortByInput(data), howManyTagOn);
+        deleteIcone.addEventListener("click", (e) => {
+          howManyTagOn--;
+          e.target.parentNode.remove();
+          recipesPattern(sortByInput(data), howManyTagOn);
+        });
       });
-    });
+    }
   }
 }

@@ -14,7 +14,7 @@
 body {
   padding: 0px 50px;
   font-family: "Lato";
-  min-width: 910px;
+  min-width: 1200px;
 }
 
 header {
@@ -146,6 +146,10 @@ header img {
   color: white;
   right: 19px;
   top: 25.5px;
+}
+
+#sort-section #tags-selection .tag-selector i:hover {
+  cursor: pointer;
 }
 
 #sort-section #tags-selection .tag-selector .tag-button {
