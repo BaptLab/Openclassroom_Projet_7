@@ -1,5 +1,6 @@
 //Fonction qui filtre les recettes comprenant l'input et les intègre dans un autre tableau
-export function sortByInput(input, data) {
+export function sortByInput(data) {
+  const input = document.querySelector("#search-input").value.toLowerCase();
   let sortedRecipes = data.filter((recipe) => {
     const { name, description, ingredients } = recipe;
     if (name.toLowerCase().includes(input)) {
